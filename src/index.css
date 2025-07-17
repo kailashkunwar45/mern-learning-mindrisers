@@ -1,0 +1,34 @@
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+@theme {
+
+  /* --color-*: initial;
+  --color-white: #fff;
+  --color-purple: #3f3cbb;
+  --color-midnight: #121063;
+  --color-tahiti: #3ab7bf;
+  --color-bermuda: #78dcca; */
+  /* --breakpoint-sm: 30rem; */
+
+  /* --breakpoint-sm: 40rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 80rem;
+  --breakpoint-2xl: 96rem; */
+
+  --animate-ani: ani 2s ease-in infinite;
+
+
+  @keyframes ani {
+    50% {
+      color: red;
+    }
+
+    ,
+    100% {
+      color: green;
+    }
+
+  }
+}
