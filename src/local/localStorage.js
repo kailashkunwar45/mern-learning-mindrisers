@@ -1,20 +1,8 @@
+export const gettasksFromLocal = () => {
+  const tasks = localStorage.getItem("tasks");
+  return tasks === null ? [] : JSON.parse(tasks);
+};
 
-
-
-
-
-
-
-
-
-
-
-export const getUsersFromLocal = () => {
-  const users = localStorage.getItem('users');
-  return users === null ? [] : JSON.parse(users);
-}
-
-
-export const setUsersToLocal = (users) => {
-  localStorage.setItem('users', JSON.stringify(users));
-}
+export const settasksToLocal = (tasks) => {
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+};

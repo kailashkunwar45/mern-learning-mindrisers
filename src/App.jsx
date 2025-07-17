@@ -1,43 +1,31 @@
-
-
-
-
-import { createBrowserRouter, RouterProvider } from "react-router"
+import { createBrowserRouter, RouterProvider } from "react-router-dom"; // fixed import from react-router-dom
 import RootLayOut from "./components/RootLayOut";
-import UserList from "./features/users/UserList";
-import UserForm from "./features/users/UserForm";
-import UpdateForm from "./features/users/UpdateForm";
 
+import TasksForm from "./features/tasks/TasksForm";
+import UpdateTask from "./features/tasks/UpdateTask";
+import TasksLists from "./features/tasks/TasksLists";
 
 export default function App() {
-
   const router = createBrowserRouter([
     {
-      path: '/',
+      path: "/",
       element: <RootLayOut />,
       children: [
         {
           index: true,
-          element: <UserList />
+          element: <TasksLists />,
         },
         {
-          path: 'add-user',
-          element: <UserForm />
+          path: "add-user",
+          element: <TasksForm />,
         },
         {
-          path: 'update-user/:id',
-          element: <UpdateForm />
-        }
-
-      ]
+          path: "update-user/:id",
+          element: <UpdateTask />,
+        },
+      ],
     },
-
-
   ]);
 
-
-
-
-
-  return <RouterProvider router={router} />
+  return <RouterProvider router={router} />;
 }
