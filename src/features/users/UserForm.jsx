@@ -1,3 +1,5 @@
+
+
 import { Button, Checkbox, Input, Option, Radio, Select, Switch, Textarea, Typography } from "@material-tailwind/react";
 import { Formik } from "formik";
 import { useDispatch } from "react-redux";
@@ -7,7 +9,7 @@ import { nanoid } from "@reduxjs/toolkit";
 import { useNavigate } from "react-router";
 
 
-const valSchema = Yup.object({
+export const valSchema = Yup.object({
   username: Yup.string().min(5).max(50).required(),
   email: Yup.string().email().required(),
   habits: Yup.array().min(1).required(),

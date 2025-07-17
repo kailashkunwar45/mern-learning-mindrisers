@@ -2,41 +2,37 @@
 
 import { Button, Checkbox, Input, Option, Radio, Select, Switch, Textarea, Typography } from "@material-tailwind/react";
 import { Formik } from "formik";
-import { useDispatch } from "react-redux";
-import * as Yup from 'yup';
-import { addUser } from "./userSlice";
-import { nanoid } from "@reduxjs/toolkit";
-import { useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router";
+import { valSchema } from "./UserForm";
+import { updateUser } from "./userSlice";
 
 
-const valSchema = Yup.object({
-  username: Yup.string().min(5).max(50).required(),
-  email: Yup.string().email().required(),
-  habits: Yup.array().min(1).required(),
-  gender: Yup.string().required(),
-  country: Yup.string().required(),
-  detail: Yup.string().min(10).max(200).required(),
 
-});
-export default function UserForm() {
+export default function UpdateForm() {
+  const { id } = useParams();
   const dispatch = useDispatch();
   const nav = useNavigate();
+  const { users } = useSelector((state) => state.userSlice);
+  const user = users.find((user) => user.id === id);
+
+
   return (
     <div className="p-5">
 
       <Formik
         initialValues={{
-          username: '',
-          email: '',
-          habits: [],
-          gender: '',
-          country: '',
-          detail: '',
-          // accept: ''
+          username: user.username,
+          email: user.email,
+          habits: user.habits,
+          gender: user.gender,
+          country: user.country,
+          detail: user.detail,
+
         }}
 
         onSubmit={(val, { resetForm }) => {
-          dispatch(addUser({ ...val, id: nanoid() }));
+          dispatch(updateUser({ ...val, id: id }));
           nav(-1);
 
         }}
@@ -66,6 +62,7 @@ export default function UserForm() {
               <Checkbox
                 onChange={handleChange}
                 label='Dancing'
+                checked={values.habits.includes('dancing')}
                 value={'dancing'}
                 name="habits"
               />
@@ -73,6 +70,7 @@ export default function UserForm() {
                 onChange={handleChange}
                 label='Singing'
                 value={'singing'}
+                checked={values.habits.includes('singing')}
                 name="habits" />
               {errors.habits && touched.habits && <h1 className="text-pink-500">{errors.habits}</h1>}
             </div>
@@ -82,6 +80,7 @@ export default function UserForm() {
               <Radio
                 onChange={handleChange}
                 label='Male'
+                checked={values.gender === 'male'}
                 value={'male'}
                 color="blue"
                 name="gender"
@@ -90,7 +89,7 @@ export default function UserForm() {
                 onChange={handleChange}
                 label='Female'
                 color="pink"
-
+                checked={values.gender === 'female'}
                 value={'female'}
                 name="gender" />
               {errors.gender && touched.gender && <h1 className="text-pink-500">{errors.gender}</h1>}
@@ -98,7 +97,7 @@ export default function UserForm() {
 
             <div>
               <Select
-
+                value={values.country}
                 onChange={(e) => setFieldValue('country', e)}
                 name="country"
                 label="Select Country">
@@ -111,17 +110,14 @@ export default function UserForm() {
             </div>
 
             <div>
-              <Textarea label="detail" name="detail" onChange={handleChange} />
+              <Textarea label="detail"
+                value={values.detail}
+                name="detail" onChange={handleChange} />
               {errors.detail && touched.detail && <h1 className="text-pink-500">{errors.detail}</h1>}
 
             </div>
 
-            {/* <div>
-              <Switch
-                onChange={handleChange}
-                name="accept"
-                label='Accept Terms and Condition' />
-            </div> */}
+
 
             <Button type="submit">Submit</Button>
 
