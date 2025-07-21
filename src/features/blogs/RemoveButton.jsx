@@ -1,6 +1,6 @@
 
 
-import { Button, IconButton } from "@material-tailwind/react";
+import { Button } from "@material-tailwind/react";
 import { useRemoveBlogMutation } from "./blogApi";
 import toast from "react-hot-toast";
 

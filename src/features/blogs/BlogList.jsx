@@ -6,7 +6,7 @@ import RemoveButton from "./RemoveButton";
 import { useNavigate } from "react-router";
 
 export default function BlogList() {
-  const { data, error, isLoading, isError } = useGetBlogsQuery();
+  const { data, error, isLoading } = useGetBlogsQuery();
 
   const nav = useNavigate();
 

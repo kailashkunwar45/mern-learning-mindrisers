@@ -25,51 +25,52 @@ export default function BlogUpdateForm() {
   return (
     <div>
 
-      {data && <div className="max-w-[400px] p-5">
-        <Formik
-          initialValues={{
-            title: data.title,
-            detail: data.detail
-          }}
+      {data &&
+        <div className="max-w-[400px] p-5">
+          <Formik
+            initialValues={{
+              title: data.title,
+              detail: data.detail
+            }}
 
-          onSubmit={async (val) => {
-            try {
-              await updateBlog({
-                id: id,
-                data: val
-              }).unwrap();
-              toast.success('Blog updated successfully');
-              nav(-1);
-            } catch (err) {
-              console.log(err);
-              toast.error(err?.error);
-            }
-          }}
-          validationSchema={valSchema}
+            onSubmit={async (val) => {
+              try {
+                await updateBlog({
+                  id: id,
+                  data: val
+                }).unwrap();
+                toast.success('Blog updated successfully');
+                nav(-1);
+              } catch (err) {
+                console.log(err);
+                toast.error(err?.error);
+              }
+            }}
+            validationSchema={valSchema}
 
-        >
-          {({ handleChange, handleSubmit, values, errors, touched }) => (
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <div>
-                <Input
-                  onChange={handleChange}
-                  name="title" label="TItle" value={values.title} />
-                {errors.title && touched.title && <h1 className="text-pink-700">{errors.title}</h1>}
-              </div>
-              <div>
-                <Textarea
-                  onChange={handleChange}
-                  value={values.detail}
-                  name="detail" label="Detail" />
-                {errors.detail && touched.detail && <h1 className="text-pink-700">{errors.detail}</h1>}
-              </div>
-              <Button loading={isLoad} type="submit">Submit</Button>
-            </form>
-          )}
+          >
+            {({ handleChange, handleSubmit, values, errors, touched }) => (
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <div>
+                  <Input
+                    onChange={handleChange}
+                    name="title" label="TItle" value={values.title} />
+                  {errors.title && touched.title && <h1 className="text-pink-700">{errors.title}</h1>}
+                </div>
+                <div>
+                  <Textarea
+                    onChange={handleChange}
+                    value={values.detail}
+                    name="detail" label="Detail" />
+                  {errors.detail && touched.detail && <h1 className="text-pink-700">{errors.detail}</h1>}
+                </div>
+                <Button loading={isLoad} type="submit">Submit</Button>
+              </form>
+            )}
 
-        </Formik>
+          </Formik>
 
-      </div>}
+        </div>}
 
     </div>
   )
