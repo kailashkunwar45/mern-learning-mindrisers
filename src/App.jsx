@@ -1,10 +1,13 @@
 
 
+
 import { createBrowserRouter, RouterProvider } from "react-router"
 import RootLayOut from "./components/RootLayOut";
-import BlogList from "./features/blogs/BlogList";
-import BlogForm from "./features/blogs/BlogForm";
-import BlogUpdateForm from "./features/blogs/BlogUpdateForm";
+import NowPlaying from "./features/now_playing/NowPlaying";
+import Popular from "./features/popular/Popular";
+import TopRated from "./features/top-rated/TopRated";
+import Upcoming from "./features/upcoming/Upcoming";
+import SearchPage from "./features/search/SearchPage";
 
 
 export default function App() {
@@ -16,15 +19,24 @@ export default function App() {
       children: [
         {
           index: true,
-          element: <BlogList />
+          element: <NowPlaying />
+        },
+
+        {
+          path: 'popular',
+          element: <Popular />
         },
         {
-          path: 'add-form',
-          element: <BlogForm />
+          path: '/movie-search/:query',
+          element: <SearchPage />
         },
         {
-          path: 'update-form/:id',
-          element: <BlogUpdateForm />
+          path: 'top_rated',
+          element: <TopRated />
+        },
+        {
+          path: 'upcoming',
+          element: <Upcoming />
         }
       ]
     },
