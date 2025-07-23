@@ -1,7 +1,7 @@
 
 
 
-import { createBrowserRouter, RouterProvider } from "react-router"
+import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import RootLayOut from "./components/RootLayOut";
 import NowPlaying from "./features/now_playing/NowPlaying";
 import Popular from "./features/popular/Popular";
@@ -27,9 +27,10 @@ export default function App() {
           element: <Popular />
         },
         {
-          path: '/movie-search/:query',
+          path: 'movie-search',
           element: <SearchPage />
         },
+
         {
           path: 'top_rated',
           element: <TopRated />
