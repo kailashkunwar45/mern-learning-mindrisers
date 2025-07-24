@@ -1,53 +1,44 @@
 
 
+import React from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import RootLayOut from "./components/RootLayOut";
-import NowPlaying from "./features/now_playing/NowPlaying";
-import Popular from "./features/popular/Popular";
-import TopRated from "./features/top-rated/TopRated";
-import Upcoming from "./features/upcoming/Upcoming";
-import SearchPage from "./features/search/SearchPage";
-
+import PopularDrinks from "./features/CockCategory/PopularDrinks";
+import AlcoholicDrinks from "./features/CockCategory/AlcoholicDrinks";
+import SearchPage from "./features/Search/SearchPage";
+import DrinkDetails from "./features/Details/DrinkDetails";
+import NonAlcholicDrinks from "./features/CockCategory/NonAlcholicDrinks";
 
 export default function App() {
-
   const router = createBrowserRouter([
     {
-      path: '/',
+      path: "/",
       element: <RootLayOut />,
       children: [
         {
           index: true,
-          element: <NowPlaying />
-        },
-
-        {
-          path: 'popular',
-          element: <Popular />
+          element: <PopularDrinks />,
         },
         {
-          path: 'movie-search',
-          element: <SearchPage />
-        },
-
-        {
-          path: 'top_rated',
-          element: <TopRated />
+          path: "alcoholic",
+          element: <AlcoholicDrinks />,
         },
         {
-          path: 'upcoming',
-          element: <Upcoming />
-        }
-      ]
+          path: "non-alcoholic",
+          element: <NonAlcholicDrinks />,
+        },
+        {
+          path: "search",
+          element: <SearchPage />,
+        },
+        {
+          path: "drinks/:id",
+          element: <DrinkDetails />,
+        },
+      ],
     },
-
-
   ]);
 
-
-
-
-
-  return <RouterProvider router={router} />
+  return <RouterProvider router={router} />;
 }

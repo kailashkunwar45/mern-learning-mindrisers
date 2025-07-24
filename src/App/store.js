@@ -1,17 +1,12 @@
-
-
-
 import { configureStore } from "@reduxjs/toolkit";
-import { movieApi } from "../shared/movieApi";
+import { cocktailApi } from "../shared/cocktailApi";
+
+
 
 export const store = configureStore({
   reducer: {
-    [movieApi.reducerPath]: movieApi.reducer
+    [cocktailApi.reducerPath]: cocktailApi.reducer,
   },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(cocktailApi.middleware),
 
-  //caching, polling ,invalidation
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat([
-      movieApi.middleware
-    ]),
-})
+});
