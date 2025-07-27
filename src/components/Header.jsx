@@ -27,7 +27,15 @@ export default function Header() {
             isActive ? 'underline underline-offset-4 flex items-center gap-3 ' : ''
           }
         >
-          Non-Alcholic
+          Non-Alcoholic
+
+        </NavLink>
+        <NavLink to='/random'
+          className={({ isActive }) =>
+            isActive ? 'underline underline-offset-4 flex items-center gap-3 ' : ''
+          }
+        >
+          Random
 
         </NavLink>
 

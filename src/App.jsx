@@ -1,14 +1,15 @@
-
-
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import RootLayOut from "./components/RootLayOut";
+
 import PopularDrinks from "./features/CockCategory/PopularDrinks";
 import AlcoholicDrinks from "./features/CockCategory/AlcoholicDrinks";
 import SearchPage from "./features/Search/SearchPage";
 import DrinkDetails from "./features/Details/DrinkDetails";
 import NonAlcholicDrinks from "./features/CockCategory/NonAlcholicDrinks";
+import HomePage from "./Pages/HomePage.jsx";
+import RandomDrink from "./features/CockCategory/random.jsx";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -18,7 +19,15 @@ export default function App() {
       children: [
         {
           index: true,
+          element: <HomePage />,
+        },
+        {
+          path: "popular",
           element: <PopularDrinks />,
+        },
+        {
+          path: "random",
+          element: <RandomDrink />,
         },
         {
           path: "alcoholic",
