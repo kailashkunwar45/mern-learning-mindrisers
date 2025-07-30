@@ -67,20 +67,57 @@
 
 
 
-import express from "express";
+// import express from "express";
+
+// const app = express();
+// const port = 5000;
+
+// app.get("/", (req, res) => {
+//   console.log(req.query);
+//   const c = String(req.query.c);
+//   if (!c.trim() || !/^[a-zA-Z\s]+$/.test(c.trim())) {
+//     return res.status(400).json({ error: "bhayena" });
+//   }
+
+//   res.json({ message: c.trim().toUpperCase() });
+// });
+
+// app.listen(port, () => console.log(`Server running on port ${port}`));
+
+// MVC Model
+
+
+import express from 'express';
+import productRoutes from './routes/productRoutes.js';
+import mongoose from 'mongoose';
+import morgan from 'morgan';
 
 const app = express();
 const port = 5000;
 
-app.get("/", (req, res) => {
-  console.log(req.query);
-  const c = String(req.query.c);
-  if (!c.trim() || !/^[a-zA-Z\s]+$/.test(c.trim())) {
-    return res.status(400).json({ error: "bhayena" });
-  }
 
-  res.json({ message: c.trim().toUpperCase() });
+mongoose.connect('mongodb+srv://kailashkunwar10:pass10000@clusterk.jo6p2zn.mongodb.net/Shop').then((val) => {
+  app.listen(port, () => {
+    console.log(' database connected server is running')
+  });
+}).catch((err) => {
+  console.log(err);
+})
+
+
+
+app.use(express.json());
+app.use(morgan('dev'));
+
+app.get('/', (req, res) => {
+  console.log(req.body);
+  return res.status(200).json({
+    message: 'welcome'
+  });
 });
 
-app.listen(port, () => console.log(`Server running on port ${port}`));
+app.use(productRoutes);
+
+
+
 
