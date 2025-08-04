@@ -4,9 +4,11 @@ import express from 'express';
 import productRoutes from './routes/productRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import orderRoutes from './routes/orderRoutes.js'
+
 import morgan from 'morgan';
 import mongoose from 'mongoose';
 import fileUpload from 'express-fileupload';
+import cartRoutes from './routes/cartRoutes.js'
 
 const app = express();
 const port = 5000;
@@ -32,5 +34,6 @@ app.get('/', (req, res) => {
 app.use(productRoutes);
 app.use(userRoutes);
 app.use(orderRoutes);
+app.use(cartRoutes);
 
 

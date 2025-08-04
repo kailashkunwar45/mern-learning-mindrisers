@@ -1,3 +1,4 @@
+
 import express from 'express';
 import { createOrder, getOrders, getOrder, updateOrder, deleteOrder } from '../controllers/orderController.js';
 
@@ -14,6 +15,5 @@ router.route('/orders/:id')
   .get(checkUser, checkOrder, getOrder)
   .patch(checkUser, checkOrder, updateOrder)
   .delete(checkUser, checkOrder, deleteOrder);
-
 
 export default router;
