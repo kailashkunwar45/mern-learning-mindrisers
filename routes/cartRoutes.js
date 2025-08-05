@@ -17,7 +17,7 @@ router.route('/carts')
   .post(checkUser, createCart)
   .get(checkUser, getCart);
 
-router.post('/carts/:id/add', checkUser, checkCart, addToCart);
+router.post('/carts/add', checkUser, checkCart, addToCart);
 router.post('/carts/:id/remove', checkUser, checkCart, removeFromCart);
 router.delete('/carts/:id', checkUser, checkCart, clearCart);
 
