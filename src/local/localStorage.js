@@ -1,13 +1,12 @@
-
-
-
-
-export const getUsersFromLocal = () => {
-  const users = localStorage.getItem('users');
-  return users === null ? [] : JSON.parse(users);
+export const setUserToLocal = (user) => {
+  localStorage.setItem('user', JSON.stringify(user));
 }
 
+export const getUserFromLocal = () => {
+  const user = localStorage.getItem('user');
+  return user === null ? null : JSON.parse(user);
+}
 
-export const setUsersToLocal = (users) => {
-  localStorage.setItem('users', JSON.stringify(users));
+export const clearLocal = () => {
+  localStorage.clear();
 }

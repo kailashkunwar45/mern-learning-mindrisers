@@ -1,11 +1,9 @@
-
-
 import { createBrowserRouter, RouterProvider } from "react-router"
 import RootLayOut from "./components/RootLayOut";
-import BlogList from "./features/blogs/BlogList";
-import BlogForm from "./features/blogs/BlogForm";
-import BlogUpdateForm from "./features/blogs/BlogUpdateForm";
-
+import Home from "./features/home/Home.jsx"
+import AdminPage from "./features/Admin/AdminPage.jsx";
+import Login from "./features/auth/Login.jsx";
+import Register from "./features/auth/Register.jsx";
 
 export default function App() {
 
@@ -16,16 +14,25 @@ export default function App() {
       children: [
         {
           index: true,
-          element: <BlogList />
+          element: <Home />
+        },
+
+        {
+          path: 'admin',
+          element: <AdminPage />
+        },
+
+
+
+        {
+          path: 'login',
+          element: <Login />
         },
         {
-          path: 'add-form',
-          element: <BlogForm />
-        },
-        {
-          path: 'update-form/:id',
-          element: <BlogUpdateForm />
+          path: 'register',
+          element: <Register />
         }
+
       ]
     },
 
