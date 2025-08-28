@@ -2,7 +2,8 @@ import { useNavigate } from "react-router";
 
 import { useGetProductsQuery } from "../product/productApi.js"
 import { Avatar, Button, Card, IconButton, Typography } from "@material-tailwind/react";
-import { baseUrl } from "../../App/apiUrl.js";
+import RemoveProduct from "./RemoveProduct.jsx";
+import { baseUrl } from "../../app/apiUrl.js";
 
 const TABLE_HEAD = ["Product", "Price", "CreatedAt", "Edit", "Delete"];
 
@@ -13,6 +14,9 @@ export default function AdminUi() {
   const nav = useNavigate();
   if (isLoading) return <h1>Loading...</h1>
   if (error) return <h1 className="text-red-500">{error.data}</h1>
+
+
+
 
   return (
     <div className="px-10 py-5">
@@ -44,7 +48,13 @@ export default function AdminUi() {
             {data.products.map(({ _id, title, image, price, createdAt }, index) => (
               <tr key={_id} className="even:bg-blue-gray-50/50">
                 <td className="p-4 flex items-center gap-5">
+
+
+
                   <Avatar src={`${baseUrl}/${image}`} />
+
+
+
                   <Typography variant="small" color="blue-gray" className="font-normal">
                     {title}
                   </Typography>
@@ -60,15 +70,16 @@ export default function AdminUi() {
                   </Typography>
                 </td>
                 <td className="p-4">
-                  <IconButton size="sm" color="purple">
+                  <IconButton
+                    onClick={() => nav(`/product-edit/${_id}`)}
+                    size="sm" color="purple">
                     <i className="fas fa-edit" />
                   </IconButton>
                 </td>
 
                 <td className="p-4">
-                  <IconButton size="sm" color="pink">
-                    <i className="fas fa-trash" />
-                  </IconButton>
+                  <RemoveProduct id={_id} />
+
                 </td>
               </tr>
             ))}

@@ -1,16 +1,26 @@
-import { mainApi } from "../../App/mainApi.js";
-
+import { mainApi } from "../../app/mainApi.js";
 
 
 
 export const productApi = mainApi.injectEndpoints({
   endpoints: (builder) => ({
 
+
+    getTopProducts: builder.query({
+      query: () => ({
+        url: '/top-5-products',
+        method: 'GET'
+      }),
+      providesTags: ['Product']
+    }),
+
+
     getProducts: builder.query({
       query: () => ({
         url: '/products',
         method: 'GET'
       }),
+      providesTags: ['Product']
     }),
 
 
@@ -19,17 +29,42 @@ export const productApi = mainApi.injectEndpoints({
         url: `/products/${id}`,
         method: 'GET'
       }),
+      providesTags: ['Product']
     }),
 
     addProduct: builder.mutation({
       query: (q) => ({
         url: `/products`,
-        body: q,
+        body: q.data,
         headers: {
           Authorization: q.token
         },
         method: 'POST'
       }),
+      invalidatesTags: ['Product']
+    }),
+
+    updateProduct: builder.mutation({
+      query: (q) => ({
+        url: `/products/${q.id}`,
+        body: q.data,
+        headers: {
+          Authorization: q.token
+        },
+        method: 'PATCH'
+      }),
+      invalidatesTags: ['Product']
+    }),
+
+    removeProduct: builder.mutation({
+      query: (q) => ({
+        url: `/products/${q.id}`,
+        headers: {
+          Authorization: q.token
+        },
+        method: 'DELETE'
+      }),
+      invalidatesTags: ['Product']
     })
 
 
@@ -40,7 +75,11 @@ export const productApi = mainApi.injectEndpoints({
 
 });
 
-export const { useGetProductQuery, useGetProductsQuery, useAddProductMutation } = productApi;
+export const { useGetProductQuery, useGetProductsQuery, useAddProductMutation, useRemoveProductMutation, useUpdateProductMutation, useGetTopProductsQuery } = productApi;
+
+
+
+
 
 
 

@@ -4,7 +4,11 @@ import RootLayOut from "./components/RootLayOut";
 import Login from "./features/auth/Login.jsx";
 import Register from "./features/auth/Register.jsx";
 import AdminUi from "./features/admin/AdminUi.jsx";
-import ProductAddForm from "./features/admin/ProductAddForm.jsx";
+import ProductAddForm from "./features/admin/productAddForm.jsx";
+import ProductEditForm from "./features/admin/ProductEditForm.jsx";
+import Home from "./features/home/Home.jsx";
+import CartPage from "./features/cart/CartPage.jsx";
+import ProductDetail from "./features/product/ProductDetails.jsx";
 
 
 
@@ -18,6 +22,7 @@ export default function App() {
       children: [
         {
           index: true,
+          element: <Home />
         },
         {
           path: 'login',
@@ -29,6 +34,16 @@ export default function App() {
           element: <Register />,
         },
 
+        {
+          path: 'cart',
+          element: <CartPage />,
+        },
+
+        {
+          path: 'product/:id',
+          element: <ProductDetail />,
+        },
+
 
         {
           path: 'admin-panel',
@@ -37,6 +52,10 @@ export default function App() {
         {
           path: 'product-add-form',
           element: <ProductAddForm />
+        },
+        {
+          path: 'product-edit/:id',
+          element: <ProductEditForm />
         },
 
 
