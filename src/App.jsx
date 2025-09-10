@@ -1,71 +1,85 @@
-import { createBrowserRouter } from "react-router"
+import { createBrowserRouter } from "react-router";
 import { RouterProvider } from "react-router-dom";
 import RootLayOut from "./components/RootLayOut";
 import Login from "./features/auth/Login.jsx";
 import Register from "./features/auth/Register.jsx";
 import AdminUi from "./features/admin/AdminUi.jsx";
-import ProductAddForm from "./features/admin/productAddForm.jsx";
+import ProductAddForm from "./features/admin/ProductAddForm.jsx";
 import ProductEditForm from "./features/admin/ProductEditForm.jsx";
 import Home from "./features/home/Home.jsx";
-import CartPage from "./features/cart/CartPage.jsx";
 import ProductDetail from "./features/product/ProductDetails.jsx";
-
+import CartPage from "./features/cart/CartPage.jsx";
+import ProfilePage from "./features/profile/ProfilePage.jsx";
+import OrderDetail from "./features/orders/OrderDetails.jsx";
+import AuthRoute from "./components/AuthRoute.jsx";
+import SearchPage from "./search/SearchPage.jsx";
 
 
 export default function App() {
-
   const router = createBrowserRouter([
-
     {
-      path: '/',
+      path: "/",
       element: <RootLayOut />,
       children: [
         {
           index: true,
-          element: <Home />
-        },
-        {
-          path: 'login',
-          element: <Login />,
+          element: <Home />,
         },
 
         {
-          path: 'register',
-          element: <Register />,
+          element: <AuthRoute />,
+          children: [
+            {
+              path: "login",
+              element: <Login />,
+            },
+            {
+              path: "register",
+              element: <Register />,
+            },
+          ]
         },
 
         {
-          path: 'cart',
+          path: 'search',
+          element: <SearchPage />
+        },
+
+        {
+          path: "product/:id",
+          element: <ProductDetail />,
+        },
+        {
+          path: "profile",
+          element: <ProfilePage />,
+        },
+        {
+          path: "cart",
           element: <CartPage />,
         },
 
         {
-          path: 'product/:id',
-          element: <ProductDetail />,
-        },
-
-
-        {
-          path: 'admin-panel',
-          element: <AdminUi />
+          path: '/order/:id',
+          element: <OrderDetail />
         },
         {
-          path: 'product-add-form',
-          element: <ProductAddForm />
+          path: "admin-panel",
+          element: <AdminUi />,
         },
         {
-          path: 'product-edit/:id',
-          element: <ProductEditForm />
+          path: "product-add-form",
+          element: <ProductAddForm />,
+        },
+        {
+          path: "product-edit/:id",
+          element: <ProductEditForm />,
         },
 
 
 
-
-      ]
+      ],
     },
-
-
   ]);
 
-  return <RouterProvider router={router} />
+  return <RouterProvider router={router} />;
 }

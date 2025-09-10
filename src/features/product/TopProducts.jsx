@@ -2,11 +2,9 @@ import { Carousel } from "@material-tailwind/react";
 import { useGetTopProductsQuery } from "./productApi.js";
 
 export default function TopProducts() {
-
   const { isLoading, error, data } = useGetTopProductsQuery();
-  if (isLoading) return <h1>Loading...</h1>
-  if (error) return <h1 className="text-red-500">{error.data}</h1>
-
+  if (isLoading) return <h1>Loading...</h1>;
+  if (error) return <h1 className="text-red-500">{error.data}</h1>;
   return (
     <Carousel className="rounded-xl h-[400px] max-w-[1100px] mx-auto">
       <img
@@ -25,6 +23,5 @@ export default function TopProducts() {
         className="h-full w-full object-cover"
       />
     </Carousel>
-  )
+  );
 }
-

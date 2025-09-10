@@ -16,28 +16,41 @@ import {
   PowerIcon,
   ShoppingCartIcon,
 } from "@heroicons/react/24/solid";
-import { NavLink, useNavigate } from "react-router";
+import { NavLink, useLocation, useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { removeUser } from "../features/user/userSlice.js";
+import SearchInput from '../search/SearchInput.jsx';
 
 export default function Header() {
   const { user } = useSelector((state) => state.userSlice);
+  const { pathname } = useLocation();
+
 
   return (
     <Navbar className="mx-auto  p-2 lg:rounded-full lg:pl-6">
       <div className="relative mx-auto flex items-center justify-between text-blue-gray-900">
-        <Typography
-          as="a"
-          href="#"
-          className="mr-4 ml-2 cursor-pointer py-1.5 font-medium"
-        >
-          Material Tailwind
-        </Typography>
+        <div>
+          <Typography
+            as="a"
+            href="#"
+            className="mr-4 ml-2 cursor-pointer py-1.5 font-medium"
+          >
+            Material Tailwind
+          </Typography>
+        </div>
+
+        {pathname !== '/search' && <div >
+          <SearchInput isNav={true} />
+        </div>
+        }
+
+        <div>
+          {user ? <ProfileMenu user={user} /> : <Button size="sm" variant="text">
+            <NavLink to={'/login'}>Log In</NavLink>
+          </Button>}
+        </div>
 
 
-        {user ? <ProfileMenu user={user} /> : <Button size="sm" variant="text">
-          <NavLink to={'/login'}>Log In</NavLink>
-        </Button>}
 
 
       </div>
@@ -109,6 +122,8 @@ function ProfileMenu({ user }) {
           />
         </Button>
       </MenuHandler>
+
+
       <MenuList className="p-1">
         {menuItems.map(({ label, icon }, key) => {
           const isLastItem = key === menuItems.length - 1;

@@ -9,6 +9,9 @@ export const userSlice = createSlice({
     user: getUserFromLocal()
   },
   reducers: {
+
+
+
     setUser: (state, action) => {
       state.user = action.payload;
       setUserToLocal(action.payload);

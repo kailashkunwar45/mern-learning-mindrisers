@@ -1,18 +1,15 @@
-import React from 'react'
-import TopProducts from '../product/TopProducts.jsx'
-
-import ProductList from '../product/ProductList.jsx'
-
+import ProductList from "../product/ProductList.jsx";
+import TopProducts from "../product/TopProducts.jsx";
 
 
 export default function Home() {
   return (
-    <div className='p-5 space-y-5 pb-12'>
+    <div className="  pb-12">
 
-
-      <TopProducts />
-
-      <ProductList />
+      <div className="space-y-10">
+        <TopProducts />
+        <ProductList />
+      </div>
 
 
     </div>
